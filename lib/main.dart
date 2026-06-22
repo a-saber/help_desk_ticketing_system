@@ -10,6 +10,9 @@ import 'core/theme/manager/theme_cubit.dart';
 import 'core/translation/manager/locale_cubit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'features/tickets/data/repo/ticket_repository.dart';
+import 'features/tickets/presentation/cubit/ticket_list/ticket_list_cubit.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupServiceLocator();
@@ -25,6 +28,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider(create: (_) => LocaleCubit()),
+        BlocProvider(
+          create: (_) =>
+              TicketListCubit(ticketRepository: getIt.get<TicketRepository>()),
+        ),
       ],
       child: Builder(
         builder: (context) {
@@ -44,7 +51,7 @@ class MyApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            initialRoute: AppRoutes.dashboard,
+            initialRoute: AppRoutes.ticketList,
             onGenerateRoute: AppRouter.onGenerateRoute,
           );
         },

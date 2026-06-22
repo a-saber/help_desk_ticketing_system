@@ -40,8 +40,6 @@ class DatabaseHelper {
         ticketId INTEGER NOT NULL,
         message TEXT NOT NULL,
         createdAt TEXT NOT NULL,
-        status_before TEXT NOT NULL,
-        status_after TEXT NOT NULL,
         FOREIGN KEY (ticketId) REFERENCES tickets (id) ON DELETE CASCADE
       )
     ''');
